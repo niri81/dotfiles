@@ -1,0 +1,126 @@
+# -------------------------------
+# Init Completions
+# -------------------------------
+autoload -Uz compinit && compinit
+
+# -------------------------------
+# Fastfetch Configuration
+# -------------------------------
+fastfetch -c paleofetch.jsonc
+
+# -------------------------------
+# Powerlevel10k Instant Prompt
+# -------------------------------
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# -------------------------------
+# Zinit - Plugin Manager Setup
+# -------------------------------
+# Install Zinit if not already installed
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} Installing Zinit...%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" || \
+        print -P "%F{160} Clone failed.%f"
+fi
+
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+# -------------------------------
+# Zinit Plugin Configuration
+# -------------------------------
+# Light mode for annexes (without Turbo)
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
+
+# Powerlevel10k theme
+zinit ice depth=1; zinit light romkatv/powerlevel10k
+
+# Core plugins
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-completions
+zinit wait lucid for MichaelAquilina/zsh-autoswitch-virtualenv
+zinit wait lucid for OMZP::colored-man-pages
+zinit wait lucid for zdharma-continuum/fast-syntax-highlighting
+zinit light Aloxaf/fzf-tab
+
+# Snippets
+zinit snippet OMZP::thefuck
+zinit snippet OMZP::command-not-found
+zinit ice as"completion"; zinit snippet OMZP::rust
+
+# -------------------------------
+# fzf Initialization
+# -------------------------------
+eval "$(fzf --zsh)"
+
+# -------------------------------
+# Zoxide Initialization
+# -------------------------------
+eval "$(zoxide init zsh --cmd cd)"
+
+# -------------------------------
+# Powerlevel10k Configuration
+# -------------------------------
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# -------------------------------
+# History Configuration
+# -------------------------------
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
+# -------------------------------
+# Completion Styling
+# -------------------------------
+zstyle ':completion:*' use-cache on
+zstyle ":completion:*" matcher-list "m:{a-z}={A-Za-z}"
+zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"
+zstyle ":completion:*" menu no
+zstyle ':fzf-tab:*' fzf-options '--layout=reverse --border --preview="cat {}"'
+zstyle ":fzf-tab:complete:cd:*" fzf-preview "ls --color $realpath"
+zstyle ":fzf-tab:complete:__zoxide_z:*" fzf-preview "ls --color $realpath"
+
+# -------------------------------
+# Aliases
+# -------------------------------
+alias lzg='echo "foo" | gpg --sign -u $(git config --global user.email) > /dev/null; lazygit'
+alias ls="ls --color"
+alias python=python3
+alias cat=bat
+
+# -------------------------------
+# User Configuration (Paths, Editor, etc.)
+# -------------------------------
+export EDITOR="nvim"
+export GPG_TTY=$(tty)
+export PNPM_HOME="/home/kerberos/.local/share/pnpm"
+
+# Ensure PNPM is in PATH
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
+# -------------------------------
+# Load Custom Functions and Other Files
+# -------------------------------
+fpath=( ~/.zshfn "${fpath[@]}" )
+autoload -Uz $fpath[1]/*(.:t)
+

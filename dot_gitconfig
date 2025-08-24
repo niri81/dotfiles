@@ -1,0 +1,10 @@
+[user]
+	signingkey = /home/kerberos/.ssh/id_ed25519_signing
+	email = 38499069+niri81@users.noreply.github.com
+	name = niri81
+[commit]
+	gpgsign = true
+[init]
+	defaultBranch = main
+[gpg]
+	format = ssh
