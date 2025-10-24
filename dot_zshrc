@@ -157,10 +157,11 @@ zstyle ":fzf-tab:complete:__zoxide_z:*" fzf-preview "ls --color $realpath"
 # -------------------------------
 # Aliases
 # -------------------------------
-alias lzg='echo "foo" | gpg --sign -u $(git config --global user.email) > /dev/null; lazygit'
+alias lzg=lazygit
 alias ls="ls --color"
 alias python=python3
 alias cat=bat
+alias jqi=jnv
 
 # -------------------------------
 # User Configuration (Paths, Editor, etc.)
