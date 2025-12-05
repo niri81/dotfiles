@@ -164,6 +164,7 @@ alias ls="ls --color"
 alias python=python3
 alias cat=bat
 alias jqi=jnv
+alias nix-shell='nix-shell --run $SHELL'
 
 # -------------------------------
 # User Configuration (Paths, Editor, etc.)
