@@ -1,0 +1,16 @@
+#:schema https://jj-vcs.github.io/jj/latest/config-schema.json
+[user]
+name = "niri81"
+email = "38499069+niri81@users.noreply.github.com"
+
+[signing]
+key = "/home/kerberos/.ssh/id_ed25519_signing"
+behavior = "own"
+backend = "ssh"
+
+[ui]
+pager = "delta"
+default-command = "log"
+
+[aliases]
+tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
