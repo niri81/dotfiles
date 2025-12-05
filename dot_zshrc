@@ -101,6 +101,8 @@ zinit light-mode for \
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 # Core plugins
+zinit ice svn pick="async.zsh"
+zinit light "mafredri/zsh-async"
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
 zinit wait lucid for MichaelAquilina/zsh-autoswitch-virtualenv
