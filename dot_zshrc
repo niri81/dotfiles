@@ -126,6 +126,11 @@ eval "$(fzf --zsh)"
 eval "$(zoxide init zsh --cmd cd)"
 
 # -------------------------------
+# Try Initialization
+# -------------------------------
+eval "$(try init ~/src/tries)"
+
+# -------------------------------
 # Powerlevel10k Configuration
 # -------------------------------
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -164,7 +169,8 @@ alias ls="ls --color"
 alias python=python3
 alias cat=bat
 alias jqi=jnv
-alias nix-shell='nix-shell --run $SHELL'
+alias open=xdg-open
+alias ssh='kitten \ssh'
 
 # -------------------------------
 # User Configuration (Paths, Editor, etc.)
@@ -182,6 +188,10 @@ esac
 # Add cargos bins to path
 export PATH="$PATH:/home/kerberos/.cargo/bin"
 
+# Add Golang bins to path
+export GOPATH=$HOME/go
+export PATH="$PATH:$GOPATH/bin"
+
 # Setup SSH Key Management
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
     ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
@@ -189,6 +199,20 @@ fi
 if [ ! -f "$SSH_AUTH_SOCK" ]; then
     source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
 fi
+
+# -------------------------------
+# Nix
+# -------------------------------
+# Add to ~/.zshrc
+alias nix-shell='nix-shell --run $SHELL'
+nix() {
+  if [[ $1 == "develop" ]]; then
+    shift
+    command nix develop -c $SHELL "$@"
+  else
+    command nix "$@"
+  fi
+}
 
 # -------------------------------
 # Load Custom Functions and Other Files
