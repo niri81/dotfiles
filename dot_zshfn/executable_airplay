@@ -1,4 +1,3 @@
 function airplay {
-  sudo ufw disable && uxplay
-  sudo ufw enable
+  uxplay
 }
