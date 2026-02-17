@@ -1,0 +1,90 @@
+theme = "dracula_at_night"
+
+[editor]
+line-number = "relative"
+trim-trailing-whitespace = true
+clipboard-provider = "wayland"
+end-of-line-diagnostics = "hint"
+color-modes = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.indent-guides]
+render = true
+active-type = "active"
+character = "╎"
+
+[editor.statusline]
+left = [
+  "mode",
+  "spinner",
+  "file-name",
+  "read-only-indicator",
+  "file-modification-indicator"
+]
+center = ["version-control"]
+right = [
+  "diagnostics",
+  "selections",
+  "register",
+  "position",
+  "file-encoding",
+  "position-percentage",
+  "file-type"
+]
+mode.normal = "NORMAL"
+mode.select = "SELECT"
+mode.insert = "INSERT"
+
+[editor.lsp]
+display-inlay-hints = true
+
+[editor.file-picker]
+hidden = false
+
+[editor.inline-diagnostics]
+cursor-line = "warning"
+
+[keys.normal]
+# Custom save, close and autocomplete
+C-s = ":w"
+C-q = ":bclose"
+C-space = "signature_help"
+# Ctrl+l/h jumps words
+C-l = "move_next_word_start"
+C-h = "move_prev_word_end"
+# Append does not have a selection anymore
+a = ["append_mode", "collapse_selection"]
+# Move lines
+C-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
+C-k = [
+  "extend_to_line_bounds",
+  "delete_selection",
+  "move_line_up",
+  "paste_before"
+]
+
+[keys.normal.space]
+q = ":quit"
+
+[keys.insert]
+# Custom save, close and autocomplete
+C-s = ":w"
+C-q = "collapse_selection"
+C-right = "move_next_word_start"
+# Ctrl+l/h jumps words
+C-left = "move_prev_word_end"
+C-space = "signature_help"
+C-l = "move_next_word_start"
+C-h = "move_prev_word_end"
+# Move lines
+C-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
+C-k = [
+  "extend_to_line_bounds",
+  "delete_selection",
+  "move_line_up",
+  "paste_before"
+]
