@@ -110,6 +110,11 @@ zinit wait lucid for OMZP::colored-man-pages
 zinit wait lucid for zdharma-continuum/fast-syntax-highlighting
 zinit light Aloxaf/fzf-tab
 
+# direnv support
+# from: https://github.com/zdharma-continuum/zinit?tab=readme-ov-file#more-examples
+zi ice as"program" make'!' atclone'./direnv hook zsh > zhook.zsh' atpull'%atclone' src"zhook.zsh"
+zi light direnv/direnv
+
 # Snippets
 zinit snippet OMZP::thefuck
 zinit snippet OMZP::command-not-found
