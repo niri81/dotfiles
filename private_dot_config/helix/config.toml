@@ -52,7 +52,7 @@ cursor-line = "warning"
 # Custom save, close and autocomplete
 C-s = ":w"
 C-q = ":bclose"
-C-space = "signature_help"
+C-space = "completion"
 # Ctrl+l/h jumps words
 C-l = "move_next_word_start"
 C-h = "move_prev_word_end"
@@ -74,10 +74,10 @@ q = ":quit"
 # Custom save, close and autocomplete
 C-s = ":w"
 C-q = "collapse_selection"
-C-right = "move_next_word_start"
+C-space = "completion"
 # Ctrl+l/h jumps words
+C-right = "move_next_word_start"
 C-left = "move_prev_word_end"
-C-space = "signature_help"
 C-l = "move_next_word_start"
 C-h = "move_prev_word_end"
 # Move lines
