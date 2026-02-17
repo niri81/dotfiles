@@ -171,6 +171,7 @@ alias cat=bat
 alias jqi=jnv
 alias open=xdg-open
 alias ssh='kitten \ssh'
+alias hx=helix
 
 # -------------------------------
 # User Configuration (Paths, Editor, etc.)
