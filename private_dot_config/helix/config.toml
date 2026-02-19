@@ -41,6 +41,7 @@ mode.insert = "INSERT"
 
 [editor.lsp]
 display-inlay-hints = true
+display-color-swatches = true
 
 [editor.file-picker]
 hidden = false
@@ -66,6 +67,8 @@ C-k = [
   "move_line_up",
   "paste_before"
 ]
+# LazyGit Integration
+C-g = [":new", ":insert-output lazygit", ":buffer-close!", ":redraw"]
 
 [keys.normal.space]
 q = ":quit"

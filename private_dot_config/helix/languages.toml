@@ -1,7 +1,21 @@
+# Setup Typst live preview
+[language-server.tinymist]
+command = "tinymist"
+config = { preview.background.enabled = true, preview.background.args = [
+  "--data-plane-host=127.0.0.1:23635",
+  "--invert-colors=never",
+  "--open"
+] }
+
+# Setup clippy output
+[language-server.rust-analyzer.config]
+check.command = "clippy"
+
 [[language]]
 name = "typst"
 auto-format = true
-formatter = { command = "typstfmt", args = ["--output", "-"] }
+formatter.command = "typstyle"
+soft-wrap.enable = true
 
 [[language]]
 name = "toml"
