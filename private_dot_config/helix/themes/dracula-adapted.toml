@@ -1,0 +1,11 @@
+inherits = "dracula"
+# Markup-specific adjustments
+"markup.raw.block" = { fg = "green", bg = "gray" }
+"markup.raw.inline" = { fg = "green", bg = "gray" }
+"markup.list" = "pink"
+# Not colored by default
+"variable" = "orange"
+
+[palette]
+# Make background a bit darker
+background = "#1E2029"
